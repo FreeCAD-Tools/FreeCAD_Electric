@@ -12,7 +12,8 @@ import FreeCADGui
 class ElectricWorkbench(FreeCADGui.Workbench):
 
     from TranslateUtils import translate
-    from Paths import iconPath
+    from ELLocations import iconPath
+    import ELCommands
 
     MenuText = translate("InitGui", "Electric")
     ToolTip = translate("InitGui", "Workbench for Electric")
@@ -20,6 +21,8 @@ class ElectricWorkbench(FreeCADGui.Workbench):
 
     def Initialize(self):
         "This function is executed when FreeCAD starts"
+        cmdlist = ['ELNewSheet','Separator','ELWireMode','ELAddLamp']
+        self.appendToolbar("Electric Tools", cmdlist)
 
     def Activated(self):
         "This function is executed when the workbench is activated"
@@ -33,7 +36,7 @@ class ElectricWorkbench(FreeCADGui.Workbench):
         "This is executed whenever the user right-clicks on screen"
 
     def GetClassName(self):
-        # this function is mandatory if this is a full python workbench
+        "this function is mandatory if this is a full python workbench"
         return "Gui::PythonWorkbench"
 
 FreeCADGui.addWorkbench(ElectricWorkbench())
