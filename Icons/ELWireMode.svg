@@ -32,14 +32,15 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg10" />
   <path
-     style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;fill-opacity:1"
      d="M 6.5439575,3.2719787 7.7414343,10.068924 8.4498006,7.4041168 10.389376,10.541168 11.215804,10.00146 9.2762286,6.8644089 11.789244,7.1848605 Z"
      id="path937"
      sodipodi:nodetypes="cccccccc" />
   <path
      style="fill:none;stroke:#000000;stroke-width:0.23013px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="m 1.1806109,9.2762284 h 1.799075 V 2.3106241 h 2.6029169"
-     id="path1736" />
+     d="M 1.1806109,9.2762284 3.1314787,9.2593625 3.1652105,2.3106241 H 5.5826028"
+     id="path1736"
+     sodipodi:nodetypes="cccc" />
   <ellipse
      style="fill:#000000;stroke-width:0.529167;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
      id="path1784"
