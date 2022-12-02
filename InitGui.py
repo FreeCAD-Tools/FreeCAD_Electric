@@ -3,7 +3,7 @@
 #
 #  InitGui.py
 #
-#  Copyright 2022 <>
+#  Copyright Evgeniy 2022 <>
 #
 ###############################################################################
 import os
@@ -11,18 +11,23 @@ import FreeCADGui
 
 class ElectricWorkbench(FreeCADGui.Workbench):
 
-    from TranslateUtils import translate
     from ELLocations import iconPath
-    import ELCommands
 
-    MenuText = translate("InitGui", "Electric")
-    ToolTip = translate("InitGui", "Workbench for Electric")
+    MenuText = "Electric"
+    ToolTip = "Workbench for Electric"
     Icon = os.path.join(iconPath, "ElectricLogo.svg")
 
     def Initialize(self):
+        import ELCommands, ELSymbolCommands, ELTechDrawCommands
+    
         "This function is executed when FreeCAD starts"
-        cmdlist = ['ELNewSheet', 'Separator', 'ELWireMode', 'ELAddNode', 'ELAddLamp', 'ELAddButton', 'Separator', 'ELQGraphicsInit', 'ELClearBluePrint']
-        self.appendToolbar("Electric Tools", cmdlist)
+        cmdlist = ELTechDrawCommands.CommandList
+        self.appendToolbar("TechDraw Electric Commands", cmdlist)
+        cmdlist = ELTechDrawCommands.SymbolCommandList
+        self.appendToolbar("TechDraw Electric Symbols", cmdlist)
+        
+        cmdlist = ELCommands.CommandList
+        self.appendToolbar("Electric BluePrint Commands", cmdlist)
 
     def Activated(self):
         "This function is executed when the workbench is activated"
