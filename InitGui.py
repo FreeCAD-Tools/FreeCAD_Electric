@@ -21,7 +21,7 @@ class ElectricWorkbench(FreeCADGui.Workbench):
 
     def Initialize(self):
         "This function is executed when FreeCAD starts"
-        cmdlist = ['ELNewSheet', 'Separator', 'ELWireMode', 'ELAddNode', 'ELAddLamp', 'ELAddButton']
+        cmdlist = ['ELNewSheet', 'Separator', 'ELWireMode', 'ELAddNode', 'ELAddLamp', 'ELAddButton', 'Separator', 'ELQGraphicsInit', 'ELClearBluePrint']
         self.appendToolbar("Electric Tools", cmdlist)
 
     def Activated(self):

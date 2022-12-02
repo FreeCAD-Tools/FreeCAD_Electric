@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="30mm"
+   height="30mm"
+   version="1.1"
+   viewBox="0 0 113.38583 113.38583"
+   id="svg10"
+   sodipodi:docname="RelayContact.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:zoom="11.87525"
+     inkscape:cx="54.609377"
+     inkscape:cy="59.325067"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg10"
+     units="mm"
+     width="50mm"
+     scale-x="1"
+     inkscape:object-paths="true"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:document-units="mm">
+    <inkscape:grid
+       type="xygrid"
+       id="grid825"
+       units="mm"
+       spacingx="3.7795277"
+       spacingy="3.7795277"
+       snapvisiblegridlinesonly="false"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1.88976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="M 18.897638,56.692916 H 45.354332 L 68.031499,45.354332"
+     id="path1350"
+     sodipodi:nodetypes="ccc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1.88976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 68.031499,56.692916 26.456693,0"
+     id="path856"
+     sodipodi:nodetypes="cc" />
+  <circle
+     style="fill:#ffffff;stroke:#000000;stroke-width:1.13385831;stroke-linejoin:round;stop-color:#000000;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+     id="path882"
+     cx="18.897638"
+     cy="56.692917"
+     r="3.7795279" />
+  <circle
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13386;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="path882-5"
+     cx="18.897638"
+     cy="56.692917"
+     r="3.7795279" />
+  <circle
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13386;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
+     id="path882-5-1"
+     cx="94.48819"
+     cy="56.692917"
+     r="3.7795279" />
+</svg>
