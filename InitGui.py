@@ -8,14 +8,15 @@
 ###############################################################################
 import os
 import FreeCADGui
+import PySide
 
 class ElectricWorkbench(FreeCADGui.Workbench):
 
-    from ELLocations import iconPath
+    from ELLocations import getIconPath
 
     MenuText = "Electric"
     ToolTip = "Workbench for Electric"
-    Icon = os.path.join(iconPath, "ElectricLogo.svg")
+    Icon = getIconPath("ElectricLogo.svg")
 
     def Initialize(self):
         import ELCommands, ELSymbolCommands, ELTechDrawCommands
@@ -28,6 +29,8 @@ class ElectricWorkbench(FreeCADGui.Workbench):
         
         cmdlist = ELCommands.CommandList
         self.appendToolbar("Electric BluePrint Commands", cmdlist)
+        cmdlist = ELSymbolCommands.SymbolCommandList
+        self.appendToolbar("Electric BluePrint Symbols", cmdlist)
 
     def Activated(self):
         "This function is executed when the workbench is activated"
@@ -44,4 +47,38 @@ class ElectricWorkbench(FreeCADGui.Workbench):
         "this function is mandatory if this is a full python workbench"
         return "Gui::PythonWorkbench"
 
+print ("QtCore Version: ",PySide.QtCore.qVersion())
+
 FreeCADGui.addWorkbench(ElectricWorkbench())
+
+class SelObserver:
+    def onSelectionChanged(self,doc,obj,sub,pnt):
+        App.Console.PrintMessage("onSelectionChanged "+str(doc)+","+str(obj)+","+str(sub)+","+str(pnt)+" \n")
+    def addSelection(self,doc,obj,sub,pnt):
+        App.Console.PrintMessage("addSelection "+str(doc)+","+str(obj)+","+str(sub)+","+str(pnt)+" \n")
+        if App.getDocument(str(doc)).getObject(str(obj)).Visibility == False:
+            App.getDocument(str(doc)).getObject(str(obj)).Visibility = True
+    def removeSelection(self,doc,obj,sub):
+        App.Console.PrintMessage("removeSelection "+str(doc)+","+str(obj)+","+str(sub)+" \n")
+        #obj = App.getDocument(doc).getObject(obj)
+        #if hasattr(obj, "BluePrintElementType"):
+        #    print ("remove ",obj)
+        #    obj.Proxy.onDelete()
+        #else:
+        #    print ("no attrib")        
+    def setSelection(self,doc,obj,sub,pnt):
+        App.Console.PrintMessage("setSelection "+str(doc)+","+str(obj)+","+str(sub)+","+str(pnt)+" \n")        
+    def clearSelection(self,doc):
+        print ("clearSelection")
+    def setPreselection(self,doc,obj,sub):
+        App.Console.PrintMessage("setPreselection "+str(doc)+","+str(obj)+","+str(sub)+" \n") 
+    def removePreselection(self,doc,obj,sub):
+        App.Console.PrintMessage("removePreselection "+str(doc)+","+str(obj)+","+str(sub)+" \n") 
+        #if hasattr(obj, "BluePrintElementType"):
+        #    print ("remove ",obj)
+        #    obj.Proxy.onDelete()
+    def pickedListChanged():
+        App.Console.PrintMessage("pickedListChanged \n") 
+
+s=SelObserver()
+FreeCADGui.Selection.addObserver(s)

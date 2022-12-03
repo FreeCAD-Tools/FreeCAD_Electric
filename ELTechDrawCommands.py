@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
 #
-#  ELCommands.py
+#  ELTechDrawCommands.py
 #
 #  Copyright Evgeniy 2022 <>
 #
@@ -13,13 +13,7 @@ import FreeCAD as App      # !!!
 import FreeCADGui
 import os
 import math
-from ELLocations import iconPath, templatesPath, symbolsPath
-
-def getIconPath(file):
-   return os.path.join(iconPath, file)
-   
-def getSymbolPath(file):
-   return os.path.join(symbolsPath, file)
+from ELLocations import getIconPath, getSymbolPath, getTemplatePath
 
 CommandList = []   
 
@@ -60,7 +54,7 @@ class ELNewSheet:
     def Activated(self):
         page = FreeCAD.activeDocument().addObject('TechDraw::DrawPage','Page')
         template = FreeCAD.activeDocument().addObject('TechDraw::DrawSVGTemplate','Template')
-        template.Template = os.path.join(templatesPath, 'Default.svg')
+        template.Template = getTemplatePath('Default.svg')
         page.Template = template
         Gui.Selection.addSelection(page)
         FreeCAD.ActiveDocument.recompute()
@@ -100,7 +94,7 @@ addCommand('ELZipTest', ELZipTest())
 # ---------------------------------------------------------------------------------------
 
 def addSymbol(file,code):
-    f = open(os.path.join(symbolsPath, file),'r')
+    f = open(getSymbolPath(file),'r')
     svg = f.read()
     f.close()
     symbol = FreeCAD.activeDocument().addObject('TechDraw::DrawViewSymbol',code)
@@ -148,10 +142,10 @@ class SymbolCommand:
         return
 
     def IsActive(self):
-        return Gui.ActiveDocument is not None
+        return Gui.Selection.getSelectionEx()[0].Object.TypeId ==  'TechDraw::DrawPage' #Gui.ActiveDocument is not None
 
 def AddSymbolCommand(type):
-    cmd = 'EL' + type
+    cmd = 'ELTD' + type
     Gui.addCommand(cmd, SymbolCommand(type,SymbolList[type]))   # Add command to FreeCAD Envorinment
     SymbolCommandList.append(cmd)                       # Add command to list of Symbols toolbar
 

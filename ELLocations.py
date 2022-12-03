@@ -9,13 +9,16 @@
 import os
 
 _dir = os.path.dirname(__file__)
-iconPath = os.path.join(_dir, 'Icons')
-templatesPath = os.path.join(_dir, 'Templates')
-symbolsPath = os.path.join(_dir, 'Symbols')
-LanguagePath = os.path.join(_dir, 'translations')
+pathToIconsFolder = os.path.join(_dir, 'Icons')
+pathToTemplatesFolder = os.path.join(_dir, 'Templates')
+pathToSymbolsFolder = os.path.join(_dir, 'Symbols')
+pathToTranslationsFolder = os.path.join(_dir, 'translations')
 
 def getIconPath(file):
-   return os.path.join(iconPath, file)
-   
+   return os.path.join(pathToIconsFolder, file)
+
 def getSymbolPath(file):
-   return os.path.join(symbolsPath, file)
+   return os.path.join(pathToSymbolsFolder, file)
+
+def getTemplatePath(file):
+   return os.path.join(pathToTemplatesFolder, file)

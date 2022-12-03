@@ -13,9 +13,10 @@ import FreeCAD as App      # !!!
 import FreeCADGui
 import os
 import math
-from ELLocations import getIconPath, getSymbolPath
+from ELLocations import getIconPath, getSymbolPath, getTemplatePath
 from PySide import QtGui, QtCore, QtSvg
 from Features.BluePrintFeature import CreateBluePrintFeature, BluePrintFeature, BluePrintViewProvider
+from Features.BPSymbolFeature import CreateBPSymbolFeature, BPSymbolFeature, BPSymbolViewProvider
 
 CommandList = []   
 
@@ -24,40 +25,53 @@ def addCommand(name, function = None):
     if function is not None:
         Gui.addCommand(name, function)
 
-class ELCreateFeature:
-    """CreateFeature"""
+class ELAddBluePrintSheet:
+    """AddBluePrintSheet"""
 
     def GetResources(self):
         return {
             'Pixmap': getIconPath('ELNewBluePrint.svg'),
-            'MenuText': "CreateFeature",
-            'ToolTip': "CreateFeature"
+            'MenuText': "Add a new BluePrint sheet",
+            'ToolTip': "Add a new BluePrint sheet"
         }
 
     def Activated(self):
-        CreateBluePrintFeature()
+        if FreeCAD.ActiveDocument == None:
+            FreeCAD.newDocument()
+        bp = CreateBluePrintFeature()
+        bp.Template = getTemplatePath('Default.svg')
+        bp.Proxy.addShape('Lamp')
+        bp.Proxy.addShape('Button',400,250)
+        bp.Proxy.addShape('RelayCoil',300,400)
+        bp.Proxy.addLabel('Text Label',200,200)
+        # Recompute document (object)
+        App.ActiveDocument.recompute()  # Mandatory! After change properties of object.
+        # Select created object
+        Gui.Selection.addSelection(bp)
         return
 
     def IsActive(self):
-        return Gui.ActiveDocument is not None
+        return True   #return Gui.ActiveDocument is not None
 
-addCommand('ELCreateFeature', ELCreateFeature())
+addCommand('ELAddBluePrintSheet', ELAddBluePrintSheet())
 
-class ELClearBluePrint:
-    """QGraphicsInit"""
+class ELAddLamp:
 
     def GetResources(self):
         return {
-            'Pixmap': getIconPath('ELClearScene.svg'),
-            'MenuText': "Clear scene",
-            'ToolTip': "Remove all lines"
+            'Pixmap': getIconPath('ELLamp.svg'),
+            'MenuText': "Add lamp svg item",
+            'ToolTip': "Add lamp svg item"
         }
 
     def Activated(self):
-        scene.clear()
+        # Get name of selected object
+        bps = CreateBPSymbolFeature()
+        App.ActiveDocument.recompute()
+        Gui.Selection.addSelection(bps)
         return
 
     def IsActive(self):
-        return True #Gui.ActiveDocument is not None
+        return str(FreeCADGui.Selection.getSelectionEx()[0].Object.Proxy.__class__) == "<class 'Features.BluePrintFeature.BluePrintFeature'>" #Gui.ActiveDocument is not None
 
-addCommand('ELClearBluePrint', ELClearBluePrint())
+addCommand('ELAddLamp', ELAddLamp())

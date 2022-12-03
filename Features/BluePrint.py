@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
 #
-#  InitGui.py
+#  BluePrint.py
 #
 #  Copyright Evgeniy 2022 <>
 #
@@ -17,8 +17,6 @@ class BluePrintGraphicsView(QtGui.QGraphicsView):
 
     def __init__(self):
         super().__init__()
-        #super(GraphicsView, self).__init__(parent)
-        #self.setScene(self._scene)
         #self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         #self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         #self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
@@ -26,9 +24,11 @@ class BluePrintGraphicsView(QtGui.QGraphicsView):
         #self.setBackgroundBrush(QtGui.QBrush(QtGui.QColor(255, 255, 255)))
         #self.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.setViewportUpdateMode(QtGui.QGraphicsView.ViewportUpdateMode.FullViewportUpdate)
+        self.setDragMode(QtGui.QGraphicsView.RubberBandDrag) #ScrollHandDrag)
+        self.setMouseTracking(True)
 
     def wheelEvent(self, event):
-        print("whell event", event)
+        #print("whell event", event)
         if event.angleDelta().y() > 0:
             factor = 1.25
             self.zoom += 1
@@ -38,30 +38,25 @@ class BluePrintGraphicsView(QtGui.QGraphicsView):
         self.scale(factor, factor)
 
     def mousePressEvent(self, event):
-        print("md event", event)
+        #print("md event", event)
         super().mousePressEvent(event)
 
 # ---------------------------------------------------------------------------------------
 
 class BluePrintGraphicsScene(QtGui.QGraphicsScene):
-
-    points = []
-    curpos = None
-    gridstep = None
-    zoom = 0
     
     def __init__(self):
         super().__init__()
+        self.points = []
+        self.curpos = None
+        self.gridstep = None
+        self.zoom = None
         self.brush = QtGui.QBrush()
         self.brush.setStyle(QtCore.Qt.SolidPattern)
         self.pen = QtGui.QPen()
         self.setGridStep(20, 20)
 
     def drawForeground(self, g, rect):
-        rx = rect.x()
-        ry = rect.y()
-        g.drawRect(rx, ry, rect.width(), rect.height())
-        g.drawRect(0, 0, 50, 50)
         prev = None
         for p in self.points:
             if prev is not None and p is not None:
@@ -79,11 +74,11 @@ class BluePrintGraphicsScene(QtGui.QGraphicsScene):
                     g.drawLine(self.curpos.x(), prev.y(), self.curpos.x(), self.curpos.y())
 
     def mouseReleaseEvent(self, event):
-        print("mrelease event", event)
+        #print("mrelease event", event)
         super().mouseReleaseEvent(event)
 
     def mousePressEvent(self, event):
-        print("mdown event", event)
+        #print("mdown event", event)
         curpos = event.scenePos()
         if self.gridstep is not None:
             self.curpos = QtCore.QPointF((curpos.x()+self.gridstep.x()/2)//self.gridstep.x()*self.gridstep.x(), (curpos.y()+self.gridstep.y()/2)//self.gridstep.y()*self.gridstep.y())
@@ -113,7 +108,7 @@ class BluePrintGraphicsScene(QtGui.QGraphicsScene):
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
-        print("mmove event", event)
+        #print("mmove event", event)
         curpos = event.scenePos()
         if self.gridstep is not None:
             self.curpos = QtCore.QPointF((curpos.x()+self.gridstep.x()/2)//self.gridstep.x()*self.gridstep.x(), (curpos.y()+self.gridstep.y()/2)//self.gridstep.y()*self.gridstep.y())

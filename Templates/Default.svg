@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
-   width="297mm"
-   height="210mm"
-   viewBox="0 0 297 210"
+   width="420mm"
+   height="297mm"
    version="1.1"
-   id="svg5"
+   viewBox="0 0 420 297"
+   id="svg144"
+   sodipodi:docname="Default.svg"
    inkscape:version="1.1 (c68e22c387, 2021-05-23)"
-   sodipodi:docname="A4L_RECT.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:freecad="http://www.freecadweb.org/wiki/index.php?title=Svg_Namespace">
+  <defs
+     id="defs148" />
   <sodipodi:namedview
-     id="namedview7"
+     id="namedview146"
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1.0"
@@ -22,36 +23,285 @@
      inkscape:pageopacity="0.0"
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
-     showgrid="true"
-     inkscape:zoom="2.1646365"
-     inkscape:cx="249.6955"
-     inkscape:cy="75.532311"
+     showgrid="false"
+     inkscape:zoom="0.5"
+     inkscape:cx="793"
+     inkscape:cy="561"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
-    <inkscape:grid
-       type="xygrid"
-       id="grid848"
-       empspacing="1"
-       units="mm"
-       spacingx="1"
-       spacingy="1" />
-  </sodipodi:namedview>
-  <defs
-     id="defs2" />
+     inkscape:current-layer="middle" />
+  <rect
+     style="fill:#ffffff;stroke:none;stroke-width:0.498542;stop-color:#000000;fill-opacity:1"
+     id="rect987"
+     width="420"
+     height="297"
+     x="0"
+     y="0" />
+  <!-- Working space 20 5 415 292 -->
+  <!-- Title block 0 232 415 292 -->
   <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <rect
-       style="fill:#ffffff;stroke:#000000;stroke-width:0.8;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-       id="rect850"
-       width="272"
-       height="200"
-       x="20"
-       y="5" />
+     id="thick_lines"
+     style="fill:none;stroke:#000;stroke-width:0.6">
+    <path
+       d="m20 5h395v287h-395v-287"
+       id="path2" />
+    <path
+       d="M230 237h185v55h-185v-55M295 252h120M230 257h65M365 257h50M230 262h65M365 272h50M295 277h120M237 237v25M247 237v55M270 237v55M285 237v55M295 237v55M365 252v40M380 252v20M385 272v5M397 252v20"
+       id="path4" />
+    <path
+       d="M8 147v145h12v-145h-12M13 147v145M8 182h12M8 207h12M8 232h12M8 267h12"
+       id="path6" />
+    <path
+       d="m20 5h70v14h-70v-14"
+       id="path8" />
   </g>
+  <g
+     id="thin_lines"
+     style="fill:none;stroke:#000;stroke-width:0.3">
+    <path
+       d="M230 242h65M230 247h65M230 252h65M230 267h65M230 272h65M230 277h65M230 282h65M230 287h65M370 257v15M375 257v15"
+       id="path11" />
+  </g>
+  <g
+     id="labels"
+     style="font-family:GOSTRUS;font-style:italic;font-size:4px;">
+    <g
+       id="stamp">
+      <text
+         x="230.42"
+         y="260.5"
+         id="text14">Изм.</text>
+      <text
+         x="238"
+         y="260.5"
+         id="text16">Лист</text>
+      <text
+         x="251.71"
+         y="260.5"
+         id="text18">№ докум.</text>
+      <text
+         x="273.59"
+         y="260.5"
+         id="text20">Подп.</text>
+      <text
+         x="285.85"
+         y="260.5"
+         id="text22">Дата</text>
+      <text
+         x="230.6"
+         y="265.5"
+         id="text24">Разраб.</text>
+      <text
+         x="230.6"
+         y="270.5"
+         id="text26">Пров.</text>
+      <text
+         x="230.6"
+         y="275.5"
+         id="text28">Т.Контр.</text>
+      <text
+         x="230.6"
+         y="285.5"
+         id="text30">Н.Контр.</text>
+      <text
+         x="230.6"
+         y="290.5"
+         id="text32">Утв.</text>
+      <text
+         x="369"
+         y="255.5"
+         id="text34">Лит.</text>
+      <text
+         x="384"
+         y="255.5"
+         id="text36">Масса</text>
+      <text
+         x="399.5"
+         y="255.5"
+         id="text38">Масштаб</text>
+      <text
+         x="368"
+         y="275.5"
+         id="text40">Лист</text>
+      <text
+         x="388"
+         y="275.5"
+         id="text42">Листов</text>
+      <text
+         x="300.3"
+         y="295.7"
+         id="text44">Копировал</text>
+      <text
+         x="375.3"
+         y="295.7"
+         id="text46">Формат A3</text>
+    </g>
+    <g
+       id="stamp_editable">
+      <g
+         id="middle"
+         style="text-anchor:middle">
+        <text
+           x="354.5"
+           y="248"
+           font-size="11.2px"
+           freecad:editable="Обозначение документа"
+           id="text51"><tspan
+             id="tspan49">АБВГ.000000.000 ПЭ3</tspan></text>
+        <text
+           x="330"
+           y="259"
+           font-size="8px"
+           freecad:editable="Наименование строка 1"
+           id="text55"><tspan
+             id="tspan53">Наименование</tspan></text>
+        <text
+           x="330"
+           y="267"
+           font-size="8px"
+           freecad:editable="Наименование строка 2"
+           id="text59"><tspan
+             id="tspan57">Схема электрическая</tspan></text>
+        <text
+           x="367.9"
+           y="267"
+           font-size="8px"
+           freecad:editable="Литера 1"
+           id="text63"><tspan
+             id="tspan61" /></text>
+        <text
+           x="372.9"
+           y="267"
+           font-size="8px"
+           freecad:editable="Литера 2"
+           id="text67"><tspan
+             id="tspan65" /></text>
+        <text
+           x="377.9"
+           y="267"
+           font-size="8px"
+           freecad:editable="Литера 3"
+           id="text71"><tspan
+             id="tspan69" /></text>
+        <text
+           x="389"
+           y="267"
+           font-size="8px"
+           freecad:editable="Масса"
+           id="text75"><tspan
+             id="tspan73"> </tspan></text>
+        <text
+           x="406.5"
+           y="267"
+           font-size="8px"
+           freecad:editable="Масштаб"
+           id="text79"><tspan
+             id="tspan77"> </tspan></text>
+        <text
+           x="329.8"
+           y="275"
+           font-size="8px"
+           freecad:editable="Идентификатор сборочного чертежа"
+           id="text83"><tspan
+             id="tspan81">принципиальная</tspan></text>
+        <text
+           x="330"
+           y="287"
+           font-size="8px"
+           freecad:editable="Материал детали"
+           id="text87"><tspan
+             id="tspan85"> </tspan></text>
+        <text
+           x="390"
+           y="287"
+           font-size="5.6px"
+           freecad:editable="Наименование организации"
+           id="text91"><tspan
+             id="tspan89">Сообщество FreeCAD</tspan></text>
+        <text
+           x="379"
+           y="275.5"
+           freecad:editable="Порядковый номер листа"
+           id="text95"><tspan
+             id="tspan93">1</tspan></text>
+        <text
+           x="407"
+           y="275.5"
+           freecad:editable="Общее количество листов"
+           id="text99"><tspan
+             id="tspan97">1</tspan></text>
+      </g>
+      <text
+         x="247.5"
+         y="265.5"
+         freecad:editable="ФИО Разработчика"
+         id="text104"><tspan
+           id="tspan102" /></text>
+      <text
+         x="247.5"
+         y="270.5"
+         freecad:editable="ФИО Проверябщего"
+         id="text108"><tspan
+           id="tspan106" /></text>
+      <text
+         x="247.5"
+         y="275.5"
+         freecad:editable="ФИО Т.Контр."
+         id="text112"><tspan
+           id="tspan110" /></text>
+      <text
+         x="230.6"
+         y="280.5"
+         freecad:editable="Дополнительное лицо"
+         id="text116"><tspan
+           id="tspan114" /></text>
+      <text
+         x="247.5"
+         y="280.5"
+         freecad:editable="ФИО дополнительного лица"
+         id="text120"><tspan
+           id="tspan118" /></text>
+      <text
+         x="247.5"
+         y="285.5"
+         freecad:editable="ФИО Н.Контр."
+         id="text124"><tspan
+           id="tspan122" /></text>
+      <text
+         x="247.5"
+         y="290.5"
+         freecad:editable="ФИО Утвердившего"
+         id="text128"><tspan
+           id="tspan126" /></text>
+    </g>
+    <g
+       transform="translate(8,5) rotate(-90)"
+       text-anchor="middle"
+       id="g141">
+      <text
+         x="-160"
+         y="3.5"
+         id="text131">Подп. и дата</text>
+      <text
+         x="-190"
+         y="3.5"
+         id="text133">Инв. № дубл.</text>
+      <text
+         x="-215"
+         y="3.5"
+         id="text135">Взам. инв. №</text>
+      <text
+         x="-245"
+         y="3.5"
+         id="text137">Подп. и дата</text>
+      <text
+         x="-275"
+         y="3.5"
+         id="text139">Инв. № подл</text>
+    </g>
+  </g>
+  <!-- DrawingContent -->
 </svg>

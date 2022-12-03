@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ###############################################################################
 #
-#  ELCommands.py
+#  ELSymbolCommands.py
 #
 #  Copyright Evgeniy 2022 <>
 #
@@ -14,26 +14,7 @@ import FreeCAD as App      # !!!
 import FreeCADGui
 import os
 import math
-from ELLocations import iconPath, templatesPath, symbolsPath
-
-def getIconPath(file):
-   return os.path.join(iconPath, file)
-   
-def getSymbolPath(file):
-   return os.path.join(symbolsPath, file)
-
-def addSymbol(file,code):
-    f = open(os.path.join(symbolsPath, file),'r')
-    svg = f.read()
-    f.close()
-    symbol = FreeCAD.activeDocument().addObject('TechDraw::DrawViewSymbol',code)
-    symbol.Symbol = svg
-    symbol.Label = symbol.Label.replace(code+"00",code)  # !!!
-    #symbol.Caption = "Caption"
-    selectedObjects = FreeCADGui.Selection.getSelection()
-    page = selectedObjects[0]        
-    page.addView(symbol)
-    FreeCAD.ActiveDocument.recompute()
+from ELLocations import getIconPath, getSymbolPath, getTemplatePath
 
 # this list must be getted from symbols folder
 SymbolList = {
@@ -67,11 +48,16 @@ class SymbolCommand:
             a.Label = a.Proxy.familyType
             FSViewProviderTree(a.ViewObject)
         FreeCAD.ActiveDocument.recompute()'''
-        addSymbol(self.Type+'.svg',self.Code)
+        #addSymbol(self.Type+'.svg',self.Code)
+        # Get name of selected object
+        obj = FreeCADGui.Selection.getSelectionEx()[0].Object
+        print(obj.Name)
+        # if object is BluePrintFeature
+        obj.Proxy.addShape(self.Type)
         return
 
     def IsActive(self):
-        return Gui.ActiveDocument is not None
+        return str(FreeCADGui.Selection.getSelectionEx()[0].Object.Proxy.__class__) == "<class 'Features.BluePrintFeature.BluePrintFeature'>" #Gui.ActiveDocument is not None
 
 def AddSymbolCommand(type):
     cmd = 'EL' + type
