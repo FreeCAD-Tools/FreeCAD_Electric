@@ -13,15 +13,9 @@ import FreeCAD as App      # !!!
 import FreeCADGui
 import os
 import math
-from ELLocations import iconPath, templatesPath, symbolsPath
-import BluePrint
+from ELLocations import getIconPath, getSymbolPath
 from PySide import QtGui, QtCore, QtSvg
-
-def getIconPath(file):
-   return os.path.join(iconPath, file)
-   
-def getSymbolPath(file):
-   return os.path.join(symbolsPath, file)
+from Features.BluePrintFeature import CreateBluePrintFeature, BluePrintFeature, BluePrintViewProvider
 
 CommandList = []   
 
@@ -30,71 +24,24 @@ def addCommand(name, function = None):
     if function is not None:
         Gui.addCommand(name, function)
 
-scene = BluePrint.GraphicsScene()
-
-class ELQGraphicsInit:
-    """QGraphicsInit"""
+class ELCreateFeature:
+    """CreateFeature"""
 
     def GetResources(self):
         return {
             'Pixmap': getIconPath('ELNewBluePrint.svg'),
-            'MenuText': "Create New Blue Print",
-            'ToolTip': "Test of GraphicsScene"
+            'MenuText': "CreateFeature",
+            'ToolTip': "CreateFeature"
         }
 
     def Activated(self):
-        scene = self.createTestScene()
-        view = BluePrint.GraphicsView() #QtGui.QGraphicsView()
-        view.setBackgroundBrush(QtGui.Qt.gray)
-        view.setScene(scene)
-        view.setMouseTracking(True)
-        self.addMDIView(view,'BluePrint')
+        CreateBluePrintFeature()
         return
 
-    def createTestScene(self):
-        '''create test scene'''
-        scene = BluePrint.GraphicsScene() #QtGui.QGraphicsScene()
-        framecolor = QtGui.QPen(QtGui.Qt.black)
-        backcolor = QtGui.QBrush(QtGui.Qt.white)
-        scene.rect = scene.addRect(-400,-400,800,600,framecolor,backcolor)
-        scene.line1 = scene.addLine(-10,-115,90,-116)
-        scene.ellipse = scene.addEllipse(20,20,100,50)
-        pen = QtGui.QPen(QtGui.Qt.red)
-        scene.rect = scene.addRect(-20,-20,40,40,pen)
-        scene.rect.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
-        scene.line2 = scene.addLine(0,0,50,50)
-        scene.line2.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        font = QtGui.QFont("Arial", 16, 2, False)
-        scene.text = scene.addText('HL1', font)
-        svg = QtSvg.QGraphicsSvgItem(getSymbolPath('Lamp.svg'))
-        scene.svg1 = scene.addItem(svg) 
-        svg.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
-        svg.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        but = QtSvg.QGraphicsSvgItem(getSymbolPath('Button.svg'))
-        scene.svg1 = scene.addItem(but) 
-        but.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
-        but.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        rc = QtSvg.QGraphicsSvgItem(getSymbolPath('RelayCoil.svg'))
-        scene.svg1 = scene.addItem(rc) 
-        rc.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
-        rc.setFlag(QtGui.QGraphicsItem.ItemIsSelectable) 
-        return scene
-
-
-    def addMDIView(self,view,tabText):
-        '''add new MDIView and set tab text'''
-        mainWindow = FreeCADGui.getMainWindow()
-        mdiArea = mainWindow.findChild(QtGui.QMdiArea)
-        subWindow = mdiArea.addSubWindow(view)
-        subWindow.show()
-        mdiArea.setActiveSubWindow(subWindow)
-        tab = mainWindow.findChildren(QtGui.QTabBar)[0]
-        tab.setTabText(tab.count()-1,tabText)
-
     def IsActive(self):
-        return True #Gui.ActiveDocument is not None
+        return Gui.ActiveDocument is not None
 
-addCommand('ELQGraphicsInit', ELQGraphicsInit())
+addCommand('ELCreateFeature', ELCreateFeature())
 
 class ELClearBluePrint:
     """QGraphicsInit"""
@@ -114,5 +61,3 @@ class ELClearBluePrint:
         return True #Gui.ActiveDocument is not None
 
 addCommand('ELClearBluePrint', ELClearBluePrint())
-
-

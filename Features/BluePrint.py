@@ -11,7 +11,7 @@ import os
 from PySide import QtGui, QtCore, QtSvg
 #from PySide2 import QtWidgets
 
-class GraphicsView(QtGui.QGraphicsView):
+class BluePrintGraphicsView(QtGui.QGraphicsView):
 
     zoom = 0
 
@@ -43,7 +43,7 @@ class GraphicsView(QtGui.QGraphicsView):
 
 # ---------------------------------------------------------------------------------------
 
-class GraphicsScene(QtGui.QGraphicsScene):
+class BluePrintGraphicsScene(QtGui.QGraphicsScene):
 
     points = []
     curpos = None
