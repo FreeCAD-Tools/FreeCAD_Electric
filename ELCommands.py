@@ -44,7 +44,7 @@ class ELQGraphicsInit:
 
     def Activated(self):
         scene = self.createTestScene()
-        view = QtGui.QGraphicsView() #BluePrint.GraphicsView() #QtGui.QGraphicsView()
+        view = BluePrint.GraphicsView() #QtGui.QGraphicsView()
         view.setBackgroundBrush(QtGui.Qt.gray)
         view.setScene(scene)
         view.setMouseTracking(True)
@@ -70,8 +70,14 @@ class ELQGraphicsInit:
         scene.svg1 = scene.addItem(svg) 
         svg.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
         svg.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        
-        # https://stackoverflow.com/questions/56259690/qt-moving-a-qgraphicsitem-causes-artifacts-leaves-trailes-behind
+        but = QtSvg.QGraphicsSvgItem(getSymbolPath('Button.svg'))
+        scene.svg1 = scene.addItem(but) 
+        but.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
+        but.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
+        rc = QtSvg.QGraphicsSvgItem(getSymbolPath('RelayCoil.svg'))
+        scene.svg1 = scene.addItem(rc) 
+        rc.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
+        rc.setFlag(QtGui.QGraphicsItem.ItemIsSelectable) 
         return scene
 
 

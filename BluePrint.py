@@ -15,8 +15,9 @@ class GraphicsView(QtGui.QGraphicsView):
 
     zoom = 0
 
-    def __init__(self, parent):
-        super(GraphicsView, self).__init__(parent)
+    def __init__(self):
+        super().__init__()
+        #super(GraphicsView, self).__init__(parent)
         #self.setScene(self._scene)
         #self.setTransformationAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
         #self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorUnderMouse)
@@ -38,6 +39,7 @@ class GraphicsView(QtGui.QGraphicsView):
 
     def mousePressEvent(self, event):
         print("md event", event)
+        super().mousePressEvent(event)
 
 # ---------------------------------------------------------------------------------------
 
@@ -78,6 +80,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
 
     def mouseReleaseEvent(self, event):
         print("mrelease event", event)
+        super().mouseReleaseEvent(event)
 
     def mousePressEvent(self, event):
         print("mdown event", event)
@@ -96,7 +99,8 @@ class GraphicsScene(QtGui.QGraphicsScene):
                 else:
                     if self.curpos.x() == prev.x() or self.curpos.y() == prev.y():
                         self.points.append(self.curpos)
-                    else:    
+                    else:
+                        # если длинна больше трех запоминать ход провода и не менять его.                    
                         if abs(self.curpos.x()-prev.x()) < abs(self.curpos.y()-prev.y()):
                             self.points.append(QtCore.QPointF(prev.x(), self.curpos.y()))
                             self.points.append(self.curpos)
@@ -106,6 +110,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
         if event.buttons() == QtCore.Qt.RightButton:            
             self.points.append(None)    
         self.update()
+        super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event):
         print("mmove event", event)
@@ -115,9 +120,11 @@ class GraphicsScene(QtGui.QGraphicsScene):
         else:
             self.curpos = curpos        
         self.update()
+        super().mouseMoveEvent(event)
 
-    def wheelEvent(self, event):
-        print("whell event", event)
+#    def wheelEvent(self, event):
+#        print("wevent", event)
+#        super().wheelEvent(event)
  
     def setGridStep(self, x, y):
         self.gridstep = QtCore.QPointF(x,y)
