@@ -32,9 +32,9 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="middle" />
+     inkscape:current-layer="svg144" />
   <rect
-     style="fill:#ffffff;stroke:none;stroke-width:0.498542;stop-color:#000000;fill-opacity:1"
+     style="fill:#ffffff;stroke:#f22b2b;stroke-width:0.1;stop-color:#000000;fill-opacity:1;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
      id="rect987"
      width="420"
      height="297"
@@ -192,14 +192,14 @@
            font-size="8px"
            freecad:editable="Масса"
            id="text75"><tspan
-             id="tspan73"> </tspan></text>
+             id="tspan73" /></text>
         <text
            x="406.5"
            y="267"
            font-size="8px"
            freecad:editable="Масштаб"
            id="text79"><tspan
-             id="tspan77"> </tspan></text>
+             id="tspan77" /></text>
         <text
            x="329.8"
            y="275"
@@ -213,7 +213,7 @@
            font-size="8px"
            freecad:editable="Материал детали"
            id="text87"><tspan
-             id="tspan85"> </tspan></text>
+             id="tspan85" /></text>
         <text
            x="390"
            y="287"

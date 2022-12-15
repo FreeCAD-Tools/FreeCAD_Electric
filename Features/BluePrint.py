@@ -10,6 +10,7 @@ import FreeCADGui
 import os
 from PySide import QtGui, QtCore, QtSvg
 #from PySide2 import QtWidgets
+from decimal import *
 
 class BluePrintGraphicsView(QtGui.QGraphicsView):
 
@@ -45,7 +46,7 @@ class BluePrintGraphicsView(QtGui.QGraphicsView):
 
 class BluePrintGraphicsScene(QtGui.QGraphicsScene):
     
-    def __init__(self):
+    def __init__(self, obj):
         super().__init__()
         self.points = []
         self.curpos = None
@@ -54,7 +55,8 @@ class BluePrintGraphicsScene(QtGui.QGraphicsScene):
         self.brush = QtGui.QBrush()
         self.brush.setStyle(QtCore.Qt.SolidPattern)
         self.pen = QtGui.QPen()
-        self.setGridStep(20, 20)
+        self.setGridStep(3.5429 * 5, 3.5429 * 5)
+        self.obj = obj
 
     def drawForeground(self, g, rect):
         prev = None
@@ -72,6 +74,27 @@ class BluePrintGraphicsScene(QtGui.QGraphicsScene):
                 else:
                     g.drawLine(prev.x(), prev.y(), self.curpos.x(), prev.y())
                     g.drawLine(self.curpos.x(), prev.y(), self.curpos.x(), self.curpos.y())
+        if self.obj.ShowGrid == True:
+            pen = QtGui.QPen()
+            pen.setStyle(QtCore.Qt.DotLine)
+            pen.setWidthF(0.1)
+            pen.setBrush(QtCore.Qt.gray)
+            g.setPen(pen)
+            gridstep = 3.5429 * 1
+            for x in range(0, 450):    
+                g.drawLine(QtCore.QPointF(x * gridstep, 0),QtCore.QPointF(x * gridstep, 1000))
+            for y in range(0, 340):
+                g.drawLine(QtCore.QPointF(0, y * gridstep),QtCore.QPointF(1500, y * gridstep))
+            pen.setWidthF(0.5)
+            g.setPen(pen)
+            gridstep = gridstep * 10
+            for x in range(0, 45):    
+                g.drawLine(QtCore.QPointF(x * gridstep, 0),QtCore.QPointF(x * gridstep, 1000))
+            for y in range(0, 34):
+                g.drawLine(QtCore.QPointF(0, y * gridstep),QtCore.QPointF(1500, y * gridstep))
+
+    def setGridStep(self, x, y):
+        self.gridstep = QtCore.QPointF(x,y)
 
     def mouseReleaseEvent(self, event):
         #print("mrelease event", event)
@@ -121,9 +144,6 @@ class BluePrintGraphicsScene(QtGui.QGraphicsScene):
 #        print("wevent", event)
 #        super().wheelEvent(event)
  
-    def setGridStep(self, x, y):
-        self.gridstep = QtCore.QPointF(x,y)
-
     def clear(self):
         self.points.clear()
         self.update()

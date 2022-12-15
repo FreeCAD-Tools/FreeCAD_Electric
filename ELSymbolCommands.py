@@ -14,7 +14,10 @@ import FreeCAD as App      # !!!
 import FreeCADGui
 import os
 import math
+import random
 from ELLocations import getIconPath, getSymbolPath, getTemplatePath
+from PySide import QtGui, QtCore, QtSvg
+import Features.BPSymbolFeature as Symbol
 
 # this list must be getted from symbols folder
 SymbolList = {
@@ -41,23 +44,22 @@ class SymbolCommand:
                 'MenuText': "Add "+self.Type+" symbol",
                 'ToolTip': "Add "+self.Code}
 
+    def TryToGetBluePrintFromActiveTab(self):
+        activeSubWindow = FreeCADGui.getMainWindow().findChild(QtGui.QMdiArea).activeSubWindow()
+        if activeSubWindow.__class__.__name__ == 'MDIViewBluePrint':
+            return activeSubWindow.obj
+        return None            
+
     def Activated(self):
-        '''for selObj in ELBase.GetAttachableSelections():
-            a = FreeCAD.ActiveDocument.addObject("Part::FeaturePython", self.TypeName)
-            ScrewObject(a, self.Type, selObj)
-            a.Label = a.Proxy.familyType
-            FSViewProviderTree(a.ViewObject)
-        FreeCAD.ActiveDocument.recompute()'''
-        #addSymbol(self.Type+'.svg',self.Code)
-        # Get name of selected object
-        obj = FreeCADGui.Selection.getSelectionEx()[0].Object
-        print(obj.Name)
-        # if object is BluePrintFeature
-        obj.Proxy.addShape(self.Type)
+        bp = self.TryToGetBluePrintFromActiveTab()
+        if bp is not None:
+            Symbol.Create(bp, self.Type, random.randint(200,400), random.randint(200,400))
+            App.ActiveDocument.recompute()
         return
 
     def IsActive(self):
-        return str(FreeCADGui.Selection.getSelectionEx()[0].Object.Proxy.__class__) == "<class 'Features.BluePrintFeature.BluePrintFeature'>" #Gui.ActiveDocument is not None
+        return self.TryToGetBluePrintFromActiveTab() is not None 
+        #str(FreeCADGui.Selection.getSelectionEx()[0].Object.Proxy.__class__) == "<class 'Features.BluePrintFeature.BluePrintFeature'>" #Gui.ActiveDocument is not None
 
 def AddSymbolCommand(type):
     cmd = 'EL' + type

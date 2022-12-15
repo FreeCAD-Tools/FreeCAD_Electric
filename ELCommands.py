@@ -16,7 +16,7 @@ import math
 from ELLocations import getIconPath, getSymbolPath, getTemplatePath
 from PySide import QtGui, QtCore, QtSvg
 from Features.BluePrintFeature import CreateBluePrintFeature, BluePrintFeature, BluePrintViewProvider
-from Features.BPSymbolFeature import CreateBPSymbolFeature, BPSymbolFeature, BPSymbolViewProvider
+import Features.BPSymbolFeature as Symbol
 
 CommandList = []   
 
@@ -40,10 +40,10 @@ class ELAddBluePrintSheet:
             FreeCAD.newDocument()
         bp = CreateBluePrintFeature()
         bp.Template = getTemplatePath('Default.svg')
-        bp.Proxy.addShape('Lamp')
-        bp.Proxy.addShape('Button',400,250)
-        bp.Proxy.addShape('RelayCoil',300,400)
-        bp.Proxy.addLabel('Text Label',200,200)
+        #Symbol.Create(bp, 'Lamp', 0, 0)
+        #Symbol.Create(bp, 'Button', 400, 250)
+        #Symbol.Create(bp, 'RelayCoil',300,400)
+        #bp.Proxy.addLabel('Text Label',200,200)
         # Recompute document (object)
         App.ActiveDocument.recompute()  # Mandatory! After change properties of object.
         # Select created object
@@ -55,23 +55,23 @@ class ELAddBluePrintSheet:
 
 addCommand('ELAddBluePrintSheet', ELAddBluePrintSheet())
 
-class ELAddLamp:
+class ELAddWire:
 
     def GetResources(self):
         return {
-            'Pixmap': getIconPath('ELLamp.svg'),
-            'MenuText': "Add lamp svg item",
-            'ToolTip': "Add lamp svg item"
+            'Pixmap': getIconPath('ELWire.svg'),
+            'MenuText': "Add wire",
+            'ToolTip': "Add wire"
         }
 
     def Activated(self):
         # Get name of selected object
-        bps = CreateBPSymbolFeature()
-        App.ActiveDocument.recompute()
-        Gui.Selection.addSelection(bps)
+        #bps = CreateBPSymbolFeature()
+        #App.ActiveDocument.recompute()
+        #Gui.Selection.addSelection(bps)
         return
 
     def IsActive(self):
         return str(FreeCADGui.Selection.getSelectionEx()[0].Object.Proxy.__class__) == "<class 'Features.BluePrintFeature.BluePrintFeature'>" #Gui.ActiveDocument is not None
 
-addCommand('ELAddLamp', ELAddLamp())
+addCommand('ELAddWire', ELAddWire())

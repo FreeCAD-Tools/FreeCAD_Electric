@@ -12,10 +12,9 @@ import FreeCADGui
 import os
 import Version
 from PySide import QtGui, QtCore, QtSvg
-from Features.BluePrint import BluePrintGraphicsView
-from Features.BluePrint import BluePrintGraphicsScene
-from Features.BPSymbolFeature import CreateBPSymbolFeature, SymbolItem
+from Features.BluePrint import BluePrintGraphicsView, BluePrintGraphicsScene
 from ELLocations import getIconPath, getSymbolPath, getTemplatePath
+import Features.BPSymbolFeature as Symbol
 
 def CreateBluePrintFeature():
     obj = App.ActiveDocument.addObject('App::FeaturePython', 'BluePrint')
@@ -34,6 +33,7 @@ class MDIViewBluePrint(QtGui.QMdiSubWindow):
     def closeEvent(self, event):
         #print("Tab is closed")
         setattr(self.obj, "Visibility", False)
+        FreeCADGui.Selection.removeSelection(self.obj)      # mandatory for get setSelection event in Observer if user select page again 
         super().closeEvent(event)
 
 class BluePrintFeature():
@@ -50,24 +50,24 @@ class BluePrintFeature():
             obj.Template = {"filter" : "Svg files (*.svg *.SVG);;All files (*.*)"}
         obj.Proxy = self
         obj.addProperty('App::PropertyLinkList', 'Elements', 'Base', 'Elements list of page').Elements = []
+        obj.addProperty('App::PropertyBool', 'ShowGrid', 'Base', 'Show grid True/False').ShowGrid = False
         #obj.setPropertyStatus("Elements", "Hidden")
         self.obj = obj
-        
-        # Open file dialog filters not supported yet
-        #svgFilter = "Svg files (*.svg *.SVG);;All files (*)"
-        #self.obj.Template.setFilter(svgFilter)
-        
-        #obj.setEditorMode("Template",2)
-        # https://wiki.freecadweb.org/FeaturePython_Custom_Properties
-        #Blueprint property type
 
     def getPyObject(self):
         App.Console.PrintMessage("BluePrintFeature getPyObject \n")
 
+    def onBeforeChange(self, obj, prop):
+        val = obj.getPropertyByName(prop)
+        App.Console.PrintMessage("BluePrintFeature onBeforeChange property: " + str(prop) + "=" + str(val) + "\n")
+        #if prop == "Elements":
+        #    for x in obj.Elements:
+        #        x.Page = None
+        
     def onChanged(self, obj, prop):
         '''Do something when a property has changed'''
-        App.Console.PrintMessage("BluePrintFeature Change property: " + str(prop) + "\n")
         val = obj.getPropertyByName(prop)
+        App.Console.PrintMessage("BluePrintFeature Change property: " + str(prop) + "=" + str(val) + "\n")
         if prop == "Visibility":
             if val == True:
                 self.createTabIfItNotExists(obj)   # Needs to open mdi tab again
@@ -76,13 +76,13 @@ class BluePrintFeature():
         if prop == "Template":
             self.createTabIfItNotExists(obj)
         #if prop == "Elements":
-        #    print(val)
-            # Вызывается при удалении добавлении объектов
+        #    for x in obj.Elements:
+        #        x.Page = obj
 
     def createTabIfItNotExists(self,obj):
         if 'frame' in locals(): # and self.frame is not None:
             return
-        self.scene = self.createTestScene()
+        self.scene = BluePrintGraphicsScene(self.obj)
         self.view = BluePrintGraphicsView()
         self.view.setBackgroundBrush(QtGui.Qt.gray)
         self.view.setScene(self.scene)
@@ -92,8 +92,10 @@ class BluePrintFeature():
         self.scene.svg_template = self.scene.addItem(svg_template)
         svg_template.setPos(0,0)
         svg_template.setZValue(-1) # Qreal from -1 ... 1
-        # Fit scene to view
-        #self.scene.setSceneRect(0,0,200,300)
+        # Fit scene to view  #self.scene.setSceneRect(0,0,200,300)
+        # Restoring all the elements again
+        for x in obj.Elements:
+            x.Proxy.createSVG()
 
     def addTab(self, obj):
         # Create MDIView
@@ -108,22 +110,6 @@ class BluePrintFeature():
         tab = mainWindow.findChildren(QtGui.QTabBar)[0] # Find QTabBar
         tab.setTabText(tab.count()-1,obj.Name)          # Set text to last tab of QTabBar
 
-#http://it.kgsu.ru/Python_Qt/oglav16.html
-
-    def createTestScene(self):
-        '''create test scene'''
-        self.scene = BluePrintGraphicsScene()
-        #framecolor = QtGui.QPen(QtGui.Qt.black)
-        #backcolor = QtGui.QBrush(QtGui.Qt.white)
-        #self.scene.line1 = self.scene.addLine(10,115,490,216)
-        #self.scene.ellipse = self.scene.addEllipse(20,20,100,50)
-        #pen = QtGui.QPen(QtGui.Qt.red)
-        #self.scene.rect = self.scene.addRect(20,20,80,80,pen)
-        #self.scene.rect.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
-        #self.scene.line2 = self.scene.addLine(40,40,80,80)
-        #self.scene.line2.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        return self.scene
-
     def onDocumentRestored(self, obj):
         App.Console.PrintMessage("BluePrintFeature onDocumentRestored " + str(obj) + " \n")
 
@@ -132,14 +118,12 @@ class BluePrintFeature():
         App.Console.PrintMessage("BluePrintFeature execute \n")
 
     def getScene(self):
-        #s = Gui.Selection.getSelectionEx()[0].Object.Proxy.getScene()
         return self.scene
 
     def shapeSetPosAndmakeMovable(self, item, x=0, y=0):
         item.setPos(x, y)
         item.setFlag(QtGui.QGraphicsItem.ItemIsMovable)
         item.setFlag(QtGui.QGraphicsItem.ItemIsSelectable)
-        #item.setFlag(QtGui.QGraphicsItem.ItemClipsToShape)
         item.setFlag(QtGui.QGraphicsItem.ItemSendsGeometryChanges)
         #item.setElementId("")
 
@@ -148,53 +132,21 @@ class BluePrintFeature():
         shadow.setBlurRadius(radius)
         shadow.setXOffset(xOffset)
         shadow.setYOffset(yOffset)
-        # Добавление эффекта к объекту
         item.setGraphicsEffect(shadow)   
-
-    def addShape(self, name, x=0, y=0):
-        #svg = QtSvg.QGraphicsSvgItem(getSymbolPath(name))
-        
-        symbol = CreateBPSymbolFeature(self, name, x, y)
-        e = self.obj.Elements
-        e.append(symbol)
-        self.obj.Elements = e
-        
-        #renderer = QtSvg.QSvgRenderer()
-        #svg = SymbolItem(symbol, self.obj)
-        #svg.setSharedRenderer(renderer)
-        #svg.renderer().load(getSymbolPath(name+".svg"))   # The problem is that when using the QSvgRenderer to load the .svg then 
-        #                                # the boundingRect of the QGraphicsSvgItem is not updated so nothing will be drawn
-        #svg.setElementId("")       # Solution is to use passing an empty string to the setElementId method to recalculate bounding box
-
-        #svg.setCursor(QtCore.Qt.SizeAllCursor)
-        #svg.setToolTip("This object is signal lamp it turned on after user press the gren button. It shows than pump motor is start to working.")
-        ##svg.setRotation(45) # Почему-то при повороте выводится все изображение
-        ##svg.setParentItem(parentItem) # For move grouping
-        
-        #svgitem = self.scene.addItem(svg) 
-        #self.shapeSetPosAndmakeMovable(svg, x, y)
 
     def addLabel(self, text, x=0, y=0, font=labelfont):
         textitem = self.scene.addText(text, font)
         self.shapeSetPosAndmakeMovable(textitem, x, y)
         textitem.setTextInteractionFlags(QtCore.Qt.TextEditorInteraction)
         self.addShadow(textitem)
-        return textitem        
+        return textitem
 
-'''
-from PySide import QtGui, QtCore, QtSvg
-s.
-mainWindow = FreeCADGui.getMainWindow()
-mdiArea = mainWindow.findChild(QtGui.QMdiArea) # Find QMdiArea at MainWindow
-subWindow = mdiArea.addSubWindow(view)
-subWindow.show()
-mdiArea.setActiveSubWindow(subWindow)
-tab = mainWindow.findChildren(QtGui.QTabBar)[0]
-tab.setTabText(tab.count()-2,"jjj")
-s =  Gui.Selection.getSelectionEx()[0]
-'''
-#mdiArea.activateNextSubWindow()
-#mdiArea.activatePreviousSubWindow()
+    def addItem(self, item):
+        self.obj.Elements += [item]
+        return
+
+    def clearSelection(self):
+        self.scene.clearSelection()
 
 class BluePrintViewProvider:
 

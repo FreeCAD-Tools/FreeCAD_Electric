@@ -1,82 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   width="24mm"
-   height="10mm"
-   version="1.1"
-   viewBox="0 0 90.708664 37.795277"
-   id="svg10"
-   sodipodi:docname="Lamp.svg"
-   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs14" />
-  <sodipodi:namedview
-     id="namedview12"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     showgrid="true"
-     inkscape:zoom="16.79469"
-     inkscape:cx="44.269944"
-     inkscape:cy="24.620877"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg10"
-     units="mm"
-     width="50mm"
-     scale-x="1"
-     inkscape:object-paths="true"
-     inkscape:snap-intersection-paths="true"
-     inkscape:snap-smooth-nodes="true"
-     inkscape:document-units="mm">
-    <inkscape:grid
-       type="xygrid"
-       id="grid825"
-       units="mm"
-       spacingx="3.7795276"
-       spacingy="3.7795276"
-       snapvisiblegridlinesonly="false"
-       enabled="true"
-       visible="true" />
-  </sodipodi:namedview>
-  <circle
-     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.88976;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-     id="path931"
-     cx="45.354332"
-     cy="18.897638"
-     r="15.118111" />
-  <path
-     id="path968"
-     style="fill:none;stroke:#000000;stroke-width:1.88976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 34.491492,29.735825 56.223776,8.0035431 m -21.732284,0 21.732284,21.7322819"
-     sodipodi:nodetypes="cccc" />
-  <path
-     style="fill:none;stroke:#000000;stroke-width:1.88976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 60.472442,18.897638 H 83.149608"
-     id="path856" />
-  <path
-     style="fill:none;stroke:#000000;stroke-width:1.88976;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-     d="M 30.236221,18.897638 H 7.5590558"
-     id="path858" />
-  <circle
-     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13386;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-     id="path882-5"
-     cx="7.5590553"
-     cy="18.897638"
-     r="3.7795279" />
-  <circle
-     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.13386;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stop-color:#000000"
-     id="path882-5-1"
-     cx="83.149605"
-     cy="18.897638"
-     r="3.7795279" />
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30mm" height="10mm" version="1.1" viewBox="0 0 30 10" xmlns="http://www.w3.org/2000/svg">
+ <g stroke="#000000">
+  <g stroke-width=".5">
+   <circle cx="15" cy="5" r="3" fill="#ffffff" stop-color="#000000" stroke-linejoin="round"/>
+   <path d="m18 5h7" fill="none"/>
+   <path d="m12 5h-7" fill="none"/>
+  </g>
+  <circle cx="5" cy="5" r=".75" fill="#ffffff" stop-color="#000000" stroke-linejoin="round" stroke-width=".3"/>
+  <circle cx="25" cy="5" r=".75" fill="#ffffff" stop-color="#000000" stroke-linejoin="round" stroke-width=".3"/>
+  <path d="m13 3 4 4" fill="none" stroke-width=".5"/>
+  <path d="m13 7 4-4" fill="none" stroke-width=".5"/>
+ </g>
 </svg>
